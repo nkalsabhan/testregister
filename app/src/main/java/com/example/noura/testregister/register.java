@@ -11,10 +11,12 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-public class register extends AppCompatActivity implements View.OnClickListener {
+public class register extends AppCompatActivity{
+
 
     Button r_submit;
-    EditText ID, FullName, Password, repassword, email, reemail, dep_id;
+    EditText r_ID, r_FullName, r_Password, r_repassword, r_email, r_reemail , r_address;
+    String id, name, pass, repass, email, remail, adress;
     private RadioGroup radioGroup;
 
     @Override
@@ -24,49 +26,30 @@ public class register extends AppCompatActivity implements View.OnClickListener 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
-        radioGroup.clearCheck();
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                                                  @Override
-                                                  public void onCheckedChanged(RadioGroup group, int checkedId) {
-                                                      RadioButton rb = (RadioButton) group.findViewById(checkedId);
-                                                      if (null != rb && checkedId > -1) {
-                                                          Toast.makeText(register.this, rb.getText(), Toast.LENGTH_SHORT).show();
-                                                      }
 
-                                                  }
-                                              }
+        r_ID = (EditText) findViewById(R.id.ID);
+        r_FullName = (EditText) findViewById(R.id.FullName);
+        r_Password = (EditText) findViewById(R.id.Password);
+        r_repassword = (EditText) findViewById(R.id.repassword);
+        r_email = (EditText) findViewById(R.id.email);
+        r_reemail = (EditText) findViewById(R.id.reemail);
+        r_address= (EditText) findViewById(R.id.address);
 
-        );
-        ID = (EditText) findViewById(R.id.ID);
-        FullName = (EditText) findViewById(R.id.FullName);
-        Password = (EditText) findViewById(R.id.Password);
-        repassword = (EditText) findViewById(R.id.repassword);
-        email = (EditText) findViewById(R.id.email);
-        reemail = (EditText) findViewById(R.id.reemail);
-        dep_id = (EditText) findViewById(R.id.dep_id);
-        r_submit = (Button) findViewById(R.id.r_submit);
-        r_submit.setOnClickListener(this);
     }
 
+public  void userReg(View view){
 
-
-
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.r_submit:
-
-                int id = Integer.parseInt(ID.getText().toString());
-                String name= FullName.getText().toString();
-                String password= Password.getText().toString();
-                String email= reemail.getText().toString();
-
-                User registeredData= new User(id, name, password, email );
-
-                break;
-        }
-    }
+    id = r_ID.getText().toString();
+    name = r_FullName.getText().toString();
+    pass = r_Password.getText().toString();
+    repass= r_repassword.getText().toString();
+    email = r_email.getText().toString();
+    remail = r_reemail.getText().toString();
+     adress= r_address.getText().toString();
+    String method = "register";
+    BackgroundTask backgroundTask = new BackgroundTask(this);
+    backgroundTask.execute(method, id, name, pass, repass, email, remail,adress);
+    finish();
+}
 
 }
