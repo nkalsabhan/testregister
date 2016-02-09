@@ -16,7 +16,7 @@ public class register extends AppCompatActivity{
 
     Button r_submit;
     EditText r_ID, r_FullName, r_Password, r_repassword, r_email, r_reemail , r_address;
-    String id, name, pass, repass, email, remail, adress;
+    String id, name, pass, repass, email, remail, address;
     private RadioGroup radioGroup;
 
     @Override
@@ -45,10 +45,10 @@ public  void userReg(View view){
     repass= r_repassword.getText().toString();
     email = r_email.getText().toString();
     remail = r_reemail.getText().toString();
-     adress= r_address.getText().toString();
+     address= r_address.getText().toString();
     String method = "register";
     BackgroundTask backgroundTask = new BackgroundTask(this);
-    backgroundTask.execute(method, id, name, pass, repass, email, remail,adress);
+    backgroundTask.execute(method, id, name, pass, email,address);
     finish();
 }
 
